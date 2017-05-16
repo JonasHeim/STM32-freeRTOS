@@ -38,6 +38,7 @@ static void prvSetupHardware( void );
  * Tasks
  */
 portTASK_FUNCTION_PROTO(vApplicationTaskTest, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationTaskTest2, pvParameters);
 
 
 // ----- main() ---------------------------------------------------------------
@@ -62,6 +63,7 @@ main(int argc, char* argv[])
 	  prvSetupHardware();
 
 	  xTaskCreate(vApplicationTaskTest, "TestTask", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationTaskTest2, "TestTask2", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
 
 	  /* Start the scheduler. */
 	  vTaskStartScheduler();
@@ -86,13 +88,13 @@ static void prvSetupHardware( void ){
 void vApplicationTickHook( void ){
 
 	trace_printf("Entered vApplicationTickHook\n");
-	for(;;);
+
 }
 
 void vApplicationIdleHook( void ){
 
 	trace_printf("Entered vApplicationIdleHook\n");
-	for(;;);
+
 }
 
 void vApplicationMallocFailedHook( void ){
@@ -117,9 +119,16 @@ void vApplicationTaskTest( void *pvParameters){
 
 	while(1){
 		trace_printf("In Task vApplicationTaskTest\n");
-		//wait 1 second
 	}
 }
+
+void vApplicationTaskTest2( void *pvParameters){
+
+	while(1){
+		trace_printf("\tIn Task vApplicationTaskTest2\n");
+	}
+}
+
 
 
 // ----------------------------------------------------------------------------
