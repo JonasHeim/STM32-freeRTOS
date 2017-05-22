@@ -34,6 +34,8 @@
  */
 static void prvSetupHardware( void );
 
+RCC_ClocksTypeDef RCC_Clocks;
+
 /*
  * Tasks
  */
@@ -79,6 +81,16 @@ static void prvSetupHardware( void ){
 	/* Setup STM32 system (clock, PLL and Flash configuration) */
 	SystemInit();
 
+	/* SysTick end of count event each 1ms */
+	RCC_GetClocksFreq(&RCC_Clocks);
+	SysTick_Config(RCC_Clocks.HCLK_Frequency / configTICK_RATE_HZ);
+
+	/* Ensure all priority bits are assigned as preemption priority bits. */
+	NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+
+	/* Initialise peripherals LEDs, Button,... */
+	vParTestInitialise();
+
 }
 
 /*
@@ -87,13 +99,13 @@ static void prvSetupHardware( void ){
 
 void vApplicationTickHook( void ){
 
-	trace_printf("Entered vApplicationTickHook\n");
+	//trace_printf("Entered vApplicationTickHook\n");
 
 }
 
 void vApplicationIdleHook( void ){
 
-	trace_printf("Entered vApplicationIdleHook\n");
+	//trace_printf("Entered vApplicationIdleHook\n");
 
 }
 
@@ -108,6 +120,9 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName){
 	( void )pxTask;
 	( void )pcTaskName;
 
+	trace_printf("Entered vApplicationStackOverflowHook\n");
+
+
 	for(;;);
 }
 
@@ -117,15 +132,25 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName){
 
 void vApplicationTaskTest( void *pvParameters){
 
+	const portTickType xDelayTime = 300/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
 	while(1){
 		trace_printf("In Task vApplicationTaskTest\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED1);
 	}
 }
 
 void vApplicationTaskTest2( void *pvParameters){
 
+	const portTickType xDelayTime = 600/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
 	while(1){
-		trace_printf("\tIn Task vApplicationTaskTest2\n");
+		trace_printf("In Task vApplicationTaskTest2\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED2);
 	}
 }
 

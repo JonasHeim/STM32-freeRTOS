@@ -18,4 +18,8 @@
 #include <stdlib.h>
 #include "diag/Trace.h"
 
+/* Peripheral test */
+#include "partest.h"
+#include "gcc_stm32f303vc_sk.h"
+
 #endif /* MAIN_H_ */
