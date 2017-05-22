@@ -39,8 +39,14 @@ RCC_ClocksTypeDef RCC_Clocks;
 /*
  * Tasks
  */
-portTASK_FUNCTION_PROTO(vApplicationTaskTest, pvParameters);
-portTASK_FUNCTION_PROTO(vApplicationTaskTest2, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED1, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED2, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED3, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED4, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED5, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED6, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED7, pvParameters);
+portTASK_FUNCTION_PROTO(vApplicationLED8, pvParameters);
 
 
 // ----- main() ---------------------------------------------------------------
@@ -64,8 +70,14 @@ main(int argc, char* argv[])
 	  /* Configure the hardware ready to run the test. */
 	  prvSetupHardware();
 
-	  xTaskCreate(vApplicationTaskTest, "TestTask", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
-	  xTaskCreate(vApplicationTaskTest2, "TestTask2", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED1, "vApplicationLED1", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED2, "vApplicationLED2", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED3, "vApplicationLED3", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED4, "vApplicationLED4", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED5, "vApplicationLED5", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED6, "vApplicationLED6", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED7, "vApplicationLED7", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
+	  xTaskCreate(vApplicationLED8, "vApplicationLED8", configMINIMAL_STACK_SIZE, (void * ) NULL, tskIDLE_PRIORITY+1UL, NULL);
 
 	  /* Start the scheduler. */
 	  vTaskStartScheduler();
@@ -130,27 +142,99 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName){
  * Tasks
  */
 
-void vApplicationTaskTest( void *pvParameters){
+void vApplicationLED1( void *pvParameters){
 
-	const portTickType xDelayTime = 300/portTICK_RATE_MS;
+	const portTickType xDelayTime = 100/portTICK_RATE_MS;
 	( void* ) pvParameters;
 
 	while(1){
-		trace_printf("In Task vApplicationTaskTest\n");
+		//trace_printf("In Task vApplicationLED1\n");
 		vTaskDelay(xDelayTime);
 		vParTestToggleLED(LED1);
 	}
 }
 
-void vApplicationTaskTest2( void *pvParameters){
+void vApplicationLED2( void *pvParameters){
+
+	const portTickType xDelayTime = 200/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
+	while(1){
+		//trace_printf("In Task vApplicationLED2\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED2);
+	}
+}
+
+void vApplicationLED3( void *pvParameters){
+
+	const portTickType xDelayTime = 300/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
+	while(1){
+		//trace_printf("In Task vApplicationLED3\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED3);
+	}
+}
+
+void vApplicationLED4( void *pvParameters){
+
+	const portTickType xDelayTime = 400/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
+	while(1){
+		//trace_printf("In Task vApplicationLED4\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED4);
+	}
+}
+
+void vApplicationLED5( void *pvParameters){
+
+	const portTickType xDelayTime = 500/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
+	while(1){
+		//trace_printf("In Task vApplicationLED5\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED5);
+	}
+}
+
+void vApplicationLED6( void *pvParameters){
 
 	const portTickType xDelayTime = 600/portTICK_RATE_MS;
 	( void* ) pvParameters;
 
 	while(1){
-		trace_printf("In Task vApplicationTaskTest2\n");
+		//trace_printf("In Task vApplicationLED6\n");
 		vTaskDelay(xDelayTime);
-		vParTestToggleLED(LED2);
+		vParTestToggleLED(LED6);
+	}
+}
+
+void vApplicationLED7( void *pvParameters){
+
+	const portTickType xDelayTime = 700/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
+	while(1){
+		//trace_printf("In Task vApplicationLED7\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED7);
+	}
+}
+
+void vApplicationLED8( void *pvParameters){
+
+	const portTickType xDelayTime = 800/portTICK_RATE_MS;
+	( void* ) pvParameters;
+
+	while(1){
+		//trace_printf("In Task vApplicationLED8\n");
+		vTaskDelay(xDelayTime);
+		vParTestToggleLED(LED8);
 	}
 }
 

@@ -82,9 +82,9 @@
 #include "gcc_stm32f303vc_sk.h"
 
 /* Only the LEDs on one of the two seven segment displays are used. */
-#define partstMAX_LEDS		4
+#define partstMAX_LEDS		8
 
-static const Led_TypeDef xLEDs[ partstMAX_LEDS ] = { LED1, LED2, LED3, LED4 };
+static const Led_TypeDef xLEDs[ partstMAX_LEDS ] = { LED1, LED2, LED3, LED4, LED5, LED6, LED7, LED8 };
 
 /*-----------------------------------------------------------*/
 
